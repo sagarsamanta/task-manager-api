@@ -17,7 +17,7 @@ router.post("/users", async (req, res) => {
     const token = await user.generateAuthToken();
     res.status(201).send({ users, token }); // calling send method with object(here object destructure used) which intenall call toJSON function located in models/user.js
   } catch (error) {
-    res.status(400).send(error);
+    res.status(405).send(error.message);
   }
 });
 //login

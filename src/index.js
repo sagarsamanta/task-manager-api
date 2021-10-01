@@ -1,8 +1,9 @@
 const experess = require("express");
 const userRouter = require("../src/routers/user");
 const taskRouter = require("../src/routers/task");
-require("./db/mongoose");
+const mongo=require("./db/mongoose");
 
+mongo()
 const app = experess();
 const port = process.env.PORT;
 

@@ -80,7 +80,7 @@ userSchema.methods.toJSON = function () { // call come from login page as confer
 }
 userSchema.methods.generateAuthToken = async function () {
   const user = this;
-  const token = jwt.sign({ _id: user._id.toString() },JWT_SECREAT_KEY);
+  const token = jwt.sign({ _id: user._id.toString() },process.env.JWT_SECREAT_KEY);
   user.tokens = user.tokens.concat({ token: token });
   await user.save();
   return token;

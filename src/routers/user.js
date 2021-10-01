@@ -5,11 +5,11 @@ const router = new express.Router();
 const User = require("../models/user");
 const {sendWellcomeEmail,sendCancelEmail}=require('../emails/account')
 const authentication = require("../middleware/authentication");
-
+const mongo_connect= require("../db/mongoose");
 
 
 //sign up
-router.post("/users", async (req, res) => {
+router.post("/users",mongo_connect, async (req, res) => {
   const user = new User(req.body);
   try {
     const users = await user.save();
@@ -21,7 +21,7 @@ router.post("/users", async (req, res) => {
   }
 });
 //login
-router.post("/users/login", async (req, res) => {
+router.post("/users/login", mongo_connect,async (req, res) => {
   try {
     const user = await User.findByCredentials( //own created function , defination in models/use.js
       req.body.email,
